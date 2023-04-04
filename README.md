@@ -175,3 +175,13 @@ Docker best practice is to clean up build dependencies. The last 3 dependencies 
 The `depends_on:` condition in the `.yml` file ensures the database 'service' starts but not necessarily the application running on the service. The database takes some time to spin up and get ready to accept connections. Often the Django app will look to connect before the database is ready and the app will crash.
 
 Make Django check for database availability.
+
+### Creating Custom Commands in Django
+
+core / management / commands / wait_for_db.py
+
+## Some Python Things
+
+Use `is` instead of `==` with booleans
+
+Use stdout.write() instead of print() ??
