@@ -169,3 +169,9 @@ The equivilant packages for Alpine are:
 -   musl-dev
 
 Docker best practice is to clean up build dependencies. The last 3 dependencies above are only required for the initial build so they will be deleted when the build is finished to keep the Docker application as light as possible.
+
+### Database Race Condition
+
+The `depends_on:` condition in the `.yml` file ensures the database 'service' starts but not necessarily the application running on the service. The database takes some time to spin up and get ready to accept connections. Often the Django app will look to connect before the database is ready and the app will crash.
+
+Make Django check for database availability.
