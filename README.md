@@ -20,11 +20,11 @@ Django REST Framework 3.12
 
 Flake8
 
--   `flake8`
+- `flake8`
 
 Django Test Suite
 
--   `python manage.py test`
+- `python manage.py test`
 
 ## Notes
 
@@ -32,22 +32,22 @@ Update `ALLOWED_HOSTS` in `settings.py`.
 
 ## Do
 
--   add Docker Hub credentials to Git Repo
+- add Docker Hub credentials to Git Repo
 
 ## GITHUB ACTIONS
 
--   Automation tool (Travis-CI, Jenkins)
--   Automate tasks & run jobs when code changes
-    -   Deployment
-    -   Linting
-    -   Unit Tests
+- Automation tool (Travis-CI, Jenkins)
+- Automate tasks & run jobs when code changes
+  - Deployment
+  - Linting
+  - Unit Tests
 
 Actions use a shared IP address. The Docker Hub rate limit is used up quickly this way. Authenticate with Docker Hub via auth token through the project 'Actions' section to keep the 200 pull limit applied only to your account.
 
 ### Triggers
 
--   push trigger > job > result (success / fail)
--   2000 free minutes / 6 hours
+- push trigger > job > result (success / fail)
+- 2000 free minutes / 6 hours
 
 ### Configuration File
 
@@ -69,13 +69,13 @@ $ python manage.py test
 
 Built on top of the `unittest` library.
 
--   Test client (simulated browser)
--   Simulate authentication
--   Temp database
+- Test client (simulated browser)
+- Simulate authentication
+- Temp database
 
 Django REST
 
--   API test client
+- API test client
 
 ### Where To Keep Tests
 
@@ -84,8 +84,8 @@ Use either a test file or a directory inside an app. Not both.
 Test file = `tests.py`
 Test directory = `tests/`
 
--   Test modules must start with `test_`
--   Test directory must contain `__init__.py`
+- Test modules must start with `test_`
+- Test directory must contain `__init__.py`
 
 ### Test Database
 
@@ -97,13 +97,13 @@ Clears data after tests are run. (Can be overridden)
 
 SimpleTestCase
 
--   no db
--   save time
+- no db
+- save time
 
 TestCase
 
--   Db
--   most common
+- Db
+- most common
 
 ```python
 from django.test import SimpleTestCase
@@ -123,14 +123,14 @@ class ViewsTests(SimpleTestCase):
 
 ## DATABASES
 
--   Add service to `docker-compose.yml`
--   Configure Django for new database in `settings.py`
-    -   Engine
-    -   Hostname
-    -   Port
-    -   Database Name
-    -   Username
-    -   Password
+- Add service to `docker-compose.yml`
+- Configure Django for new database in `settings.py`
+  - Engine
+  - Hostname
+  - Port
+  - Database Name
+  - Username
+  - Password
 
 Pull configuration values from env variables.
 
@@ -138,35 +138,35 @@ Pull configuration values from env variables.
 
 Psycopg2
 
--   database adapter package for Django
--   Officially supported by Django
+- database adapter package for Django
+- Officially supported by Django
 
 psycopg2-binary
 
--   not recommended for production
--   not as performant
+- not recommended for production
+- not as performant
 
 psycopg2
 
--   compiles from source
--   compiles specifically for the OS it's running on
--   required dependencies that are not installed by default
--   installs easily with Docker
+- compiles from source
+- compiles specifically for the OS it's running on
+- required dependencies that are not installed by default
+- installs easily with Docker
 
 Finding the correct dependencies can be a chore since they have different names depending on where you look for them.
 
 The psycopg2 documentation list them as:
 
--   C compilier
--   python3-dev
--   libpq-dev
+- C compilier
+- python3-dev
+- libpq-dev
 
 The equivilant packages for Alpine are:
 
--   posgtresql-client
--   build-base
--   psotgresql-dev
--   musl-dev
+- posgtresql-client
+- build-base
+- psotgresql-dev
+- musl-dev
 
 Docker best practice is to clean up build dependencies. The last 3 dependencies above are only required for the initial build so they will be deleted when the build is finished to keep the Docker application as light as possible.
 
@@ -180,8 +180,29 @@ Make Django check for database availability.
 
 core / management / commands / wait_for_db.py
 
+### User Accounts
+
+#### User Model
+
 ## Some Python Things
 
 Use `is` instead of `==` with booleans
 
-Use stdout.write() instead of print() ??
+Use stdout.write() instead of print() with Docker
+
+## USER ACCOUNTS
+
+Best practice is to create a custom User model based upon Django's pre-built modeles.
+
+Django's `AbstractUser` class is the typical base model for this.
+
+### User Model Manager
+
+- Manage objects
+- Customized methods
+  - hashing passwords
+- Built in methods
+  - normalize_email
+- Create superuser
+
+`BaseUserManager` is Django's base class for managing users.
