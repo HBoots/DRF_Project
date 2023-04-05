@@ -14,7 +14,7 @@ class ModelTests(TestCase):
         )
 
         self.assertEqual(user.email, email)
-        self.assertTre(user.check_password(password))
+        self.assertTrue(user.check_password(password))
 
 # TEST NOTES
 # get_user_model is a helper function that will retrieve the default user model.  Useful if the default changes.
