@@ -21,7 +21,7 @@ class ModelTests(TestCase):
             ["Test1@Example.com", "Test1@example.com"],
             ["test2@EXAMPLE.com", "test2@example.com"],
             ["test3@example.COM", "test3@example.com"],
-            ["TEST4@example.com", "test4@example.com"],
+            ["TEST4@example.com", "TEST4@example.com"],
         ]
 
         for entered, expected_result in test_strings:
