@@ -206,3 +206,17 @@ Django's `AbstractUser` class is the typical base model for this.
 - Create superuser
 
 `BaseUserManager` is Django's base class for managing users.
+
+## To Review in Course
+
+Create User Model
+
+- try to do tests and models without help.
+- create custom user model
+- create superuser with custom model
+- set up email login and valdiation
+
+Setup Django Admin
+
+- customize admin
+- class based on ModelAdmin or UserAdmin

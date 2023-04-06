@@ -16,6 +16,18 @@ class ModelTests(TestCase):
         self.assertEqual(user.email, email)
         self.assertTrue(user.check_password(password))
 
-# TEST NOTES
-# get_user_model is a helper function that will retrieve the default user model.  Useful if the default changes.
-# example.com is a reserved domain specifically used for testing.  Using any other domain name in testing risks sending actual emails to somebody.
+    def test_user_email_normalize(self):
+        test_strings = [
+            ["Test1@Example.com", "Test1@example.com"],
+            ["test2@EXAMPLE.com", "test2@example.com"],
+            ["Test3@example.COM", "test3@example.com"],
+            ["TEST4@example.com", "test4@example.com"],
+        ]
+
+        for entered, expected_result in test_strings:
+            user = get_user_model().objects.create_user(
+                email=entered,
+                password="test_password"
+            )
+
+            self.assertEqual(user.email, expected_result)
