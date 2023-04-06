@@ -38,12 +38,11 @@ class ModelTests(TestCase):
         #     password="test_password"
         # )
 
-        self.assertRaises(
-            ValueError,
+        with self.assertRaises(ValueError):
             get_user_model().objects.create_user(
                 email="",
                 password="test_password"
-            ))
+            )
 
     def test_create_superuser(self):
         user = get_user_model().objects.create_superuser(
