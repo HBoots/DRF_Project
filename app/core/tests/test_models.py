@@ -20,7 +20,7 @@ class ModelTests(TestCase):
         test_strings = [
             ["Test1@Example.com", "Test1@example.com"],
             ["test2@EXAMPLE.com", "test2@example.com"],
-            ["Test3@example.COM", "test3@example.com"],
+            ["test3@example.COM", "test3@example.com"],
             ["TEST4@example.com", "test4@example.com"],
         ]
 
@@ -31,3 +31,20 @@ class ModelTests(TestCase):
             )
 
             self.assertEqual(user.email, expected_result)
+
+    def test_user_email_required(self):
+        user = get_user_model().objects.create_user(
+            email="",
+            password="test_password"
+        )
+
+        self.assertRaises(ValueError, user)
+
+    def test_create_superuser(self):
+        user = get_user_model().objects.create_superuser(
+            'test@example.com',
+            'test_password'
+        )
+
+        self.assertTrue(user.is_superuser)
+        self.assertTrue(user.is_staff)
